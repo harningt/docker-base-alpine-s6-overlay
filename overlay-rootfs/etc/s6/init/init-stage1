@@ -1,0 +1,50 @@
+#!/usr/bin/execlineb -S0
+
+##
+## dump environment into an envdir
+##
+
+/usr/bin/if { /usr/bin/s6-mkdir -pm 0755 -- /var/run/s6/container_environment }
+/usr/bin/if { /usr/bin/s6-dumpenv -- /var/run/s6/container_environment }
+
+
+##
+## create env folder for each init stage, although stage1 is always copied from
+## /etc/s6/init/env, it's made available in /var/run/s6/env-stage1 just for
+## consistency.
+##
+
+/usr/bin/if
+{
+  /usr/bin/elglob -0 -- envdirs /var/run/s6/env-*
+  /usr/bin/forx -p -- envdir { ${envdirs} }
+  /usr/bin/import -u envdir
+  /usr/bin/s6-rmrf ${envdir}
+}
+/usr/bin/if { /usr/bin/s6-hiercopy /etc/s6/init/env /var/run/s6/env-stage1 }
+/usr/bin/if { /usr/bin/s6-mkdir -pm 0755 -- /var/run/s6/env-stage2 }
+/usr/bin/if { /usr/bin/s6-mkdir -pm 0755 -- /var/run/s6/env-stage3 }
+
+
+##
+## run everything else with only the environment defined in
+## /var/run/s6/env-stage1. Programs can get back the container
+## environment by using "with-contenv program".
+##
+
+/usr/bin/exec -c --
+/usr/bin/s6-envdir /var/run/s6/env-stage1
+/usr/bin/exec --
+
+
+##
+## route based on what was provided in S6_LOGGING
+##
+
+backtick -D 0 -n S6_LOGGING { printcontenv S6_LOGGING }
+import -u S6_LOGGING
+ifelse { s6-test ${S6_LOGGING} -ne 0 }
+{
+  /etc/s6/init-catchall/init-stage1 $@
+}
+/etc/s6/init-no-catchall/init-stage1 $@

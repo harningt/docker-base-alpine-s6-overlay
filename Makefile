@@ -14,6 +14,10 @@ sync: ${TMP}/s6-overlay/.git/config
 	cp -arv ${TMP}/s6-overlay/builder/overlay-rootfs ${OUT}
 	cp -av scripts/prepare-files ${OUT}/
 
+sync-commit: sync
+	git add ${OUT}
+	git commit ${OUT} -m "overlay-rootfs: updates build with $(shell git --git-dir=${TMP}/s6-overlay/.git describe --all --long)"
+
 ${TMP}/s6-overlay/.git/config:
 	git clone ${REPOSITORY} ${TMP}/s6-overlay
 

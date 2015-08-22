@@ -5,3 +5,5 @@
 Session.vim
 .netrwhist
 *~
+# Temporary directory for work
+.tmp

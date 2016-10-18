@@ -8,19 +8,15 @@ number of separate sources for difficult-to-inspect binaries.
 See the original [s6-overlay project](https://github.com/just-containers/s6-overlay)
 for more details.
 
+Recent updates have taken advantage of the new 'nobin' releases of s6-overlay,
+reducing the need to massage the data format.
+
 # Updating
 
-To synchronize the source tree with s6-overlay, assuming a Linux
-build machine with git and gnu make, execute:
+To synchronize the source tree with s6-overlay, update the S6\_OVERLAY\_RELEASE item
+inside the Dockerfile.
 
-make sync
-
-You may also configure the build to pull from a specific tag via:
-
-make sync CHECKOUT=v1.14.0.1
-
-The setup permission script may need to be updated if the `/builder/build-latest`
-script changes.
+If a new key is used, you'll need to add it to the trust keychain in keys/trust.gpg
 
 # Quickstart
 

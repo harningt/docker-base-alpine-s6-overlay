@@ -22,7 +22,7 @@ RUN apk add --update s6 s6-portable-utils && \
     cd ${TMP_BUILD_DIR} && \
     gpg --no-default-keyring --keyring ./trust.gpg s6-overlay-nobin.tar.gz.sig && \
     apk del verify && \
-    tar -C / -xf s6-overlay-nobin.tar.gz && \
+    tar -C / -xzf s6-overlay-nobin.tar.gz && \
     cd / && \
     rm -rf /var/cache/apk/* && \
     rm -rf ${TMP_BUILD_DIR}

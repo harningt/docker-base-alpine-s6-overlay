@@ -2,7 +2,7 @@
 # AUTHOR:       Thomas Harning Jr <harningt@gmail.com>
 # DESCRIPTION:  Alpine linux base image with s6-overlay injected
 
-FROM alpine:edge
+FROM alpine:3.4
 MAINTAINER Thomas Harning Jr <harningt@gmail.com>
 
 # Add in base configuration

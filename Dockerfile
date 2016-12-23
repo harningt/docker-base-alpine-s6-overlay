@@ -2,7 +2,7 @@
 # AUTHOR:       Thomas Harning Jr <harningt@gmail.com>
 # DESCRIPTION:  Alpine linux base image with s6-overlay injected
 
-FROM alpine:3.4
+FROM alpine:3.5
 MAINTAINER Thomas Harning Jr <harningt@gmail.com>
 
 ENV S6_OVERLAY_RELEASE v1.18.1.5

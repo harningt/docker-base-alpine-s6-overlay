@@ -20,7 +20,7 @@ COPY keys/trust.gpg ${TMP_BUILD_DIR}/
 RUN apk add --update s6 s6-portable-utils && \
     apk add --virtual verify gnupg && \
     cd ${TMP_BUILD_DIR} && \
-    gpg --no-default-keyring --keyring ./trust.gpg s6-overlay-nobin.tar.gz.sig && \
+    gpg --no-default-keyring --keyring ./trust.gpg --verify s6-overlay-nobin.tar.gz.sig && \
     apk del verify && \
     tar -C / -xzf s6-overlay-nobin.tar.gz && \
     cd / && \

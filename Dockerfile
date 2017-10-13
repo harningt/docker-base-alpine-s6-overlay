@@ -5,7 +5,7 @@
 FROM alpine:3.6
 MAINTAINER Thomas Harning Jr <harningt@gmail.com>
 
-ENV S6_OVERLAY_RELEASE v1.19.1.1
+ENV S6_OVERLAY_RELEASE v1.20.0.0
 ENV TMP_BUILD_DIR /tmp/build
 
 # Pull in the overlay binaries
@@ -19,8 +19,9 @@ COPY keys/trust.gpg ${TMP_BUILD_DIR}/
 # Update, install necessary packages, fixup permissions, delete junk
 RUN apk add --update s6 s6-portable-utils && \
     apk add --virtual verify gnupg && \
+    chmod 700 ${TMP_BUILD_DIR} && \
     cd ${TMP_BUILD_DIR} && \
-    gpg --no-default-keyring --keyring ./trust.gpg --verify s6-overlay-nobin.tar.gz.sig && \
+    gpg --no-options --no-default-keyring --homedir ${TMP_BUILD_DIR} --keyring ./trust.gpg --no-auto-check-trustdb --trust-model always --verify s6-overlay-nobin.tar.gz.sig s6-overlay-nobin.tar.gz && \
     apk del verify && \
     tar -C / -xzf s6-overlay-nobin.tar.gz && \
     cd / && \

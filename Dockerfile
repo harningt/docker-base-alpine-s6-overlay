@@ -5,7 +5,7 @@
 FROM alpine:edge
 MAINTAINER Thomas Harning Jr <harningt@gmail.com>
 
-ENV S6_OVERLAY_RELEASE v1.19.1.1
+ENV S6_OVERLAY_RELEASE v1.20.0.0
 ENV TMP_BUILD_DIR /tmp/build
 
 # Pull in the overlay binaries

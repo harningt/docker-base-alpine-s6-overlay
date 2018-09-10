@@ -5,7 +5,7 @@
 FROM alpine:3.6
 MAINTAINER Thomas Harning Jr <harningt@gmail.com>
 
-ENV S6_OVERLAY_RELEASE v1.21.4.0
+ENV S6_OVERLAY_RELEASE v1.21.7.0
 ENV TMP_BUILD_DIR /tmp/build
 
 # Pull in the overlay binaries

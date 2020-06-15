@@ -29,7 +29,7 @@ RUN cd ${TMP_BUILD_DIR} && \
     gpg --no-options --no-default-keyring --homedir ${TMP_BUILD_DIR} --keyring ./trust.gpg --no-auto-check-trustdb --trust-model always --verify s6-overlay-nobin.tar.gz.sig s6-overlay-nobin.tar.gz && \
     gpg --no-options --no-default-keyring --homedir ${TMP_BUILD_DIR} --keyring ./trust.gpg --no-auto-check-trustdb --trust-model always --verify justc-envdir-${JUSTC_ENVDIR_RELEASE}-linux-amd64.tar.gz.sig justc-envdir-${JUSTC_ENVDIR_RELEASE}-linux-amd64.tar.gz
 
-FROM alpine:edge
+FROM alpine:3.12
 
 ENV TMP_BUILD_DIR /tmp/build
 

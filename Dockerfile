@@ -5,7 +5,7 @@
 FROM alpine:edge
 MAINTAINER Thomas Harning Jr <harningt@gmail.com>
 
-ENV S6_OVERLAY_RELEASE v2.0.0.0
+ENV S6_OVERLAY_RELEASE v2.0.0.1
 ENV JUSTC_ENVDIR_RELEASE 1.0.0
 ENV TMP_BUILD_DIR /tmp/build
 

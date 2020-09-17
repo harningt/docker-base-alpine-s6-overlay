@@ -25,9 +25,9 @@ ADD https://github.com/just-containers/justc-envdir/releases/download/v${JUSTC_E
 
 # Patch in source for testing sources...
 # Update, install necessary packages, fixup permissions, delete junk
-RUN cd ${TMP_BUILD_DIR} && \
-    gpg --no-options --no-default-keyring --homedir ${TMP_BUILD_DIR} --keyring ./trust.gpg --no-auto-check-trustdb --trust-model always --verify s6-overlay-nobin.tar.gz.sig s6-overlay-nobin.tar.gz && \
-    gpg --no-options --no-default-keyring --homedir ${TMP_BUILD_DIR} --keyring ./trust.gpg --no-auto-check-trustdb --trust-model always --verify justc-envdir-${JUSTC_ENVDIR_RELEASE}-linux-amd64.tar.gz.sig justc-envdir-${JUSTC_ENVDIR_RELEASE}-linux-amd64.tar.gz
+WORKDIR ${TMP_BUILD_DIR}
+
+RUN gpg --no-options --no-default-keyring --homedir ${TMP_BUILD_DIR} --keyring ./trust.gpg --no-auto-check-trustdb --trust-model always --verify-files *.sig
 
 FROM alpine:edge
 

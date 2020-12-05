@@ -12,9 +12,9 @@ ENV TMP_BUILD_DIR /tmp/build
 # Pull in the trust keys
 COPY keys/trust.gpg ${TMP_BUILD_DIR}/
 
-ENV S6_OVERLAY_RELEASE v2.1.0.0
+ENV S6_OVERLAY_RELEASE v2.1.0.2
 ENV JUSTC_ENVDIR_RELEASE 1.0.0
-ENV S6_OVERLAY_PREINIT_RELEASE 1.0.2
+ENV S6_OVERLAY_PREINIT_RELEASE 1.0.3
 
 # Pull in the overlay binaries
 ADD https://github.com/just-containers/s6-overlay/releases/download/${S6_OVERLAY_RELEASE}/s6-overlay-nobin.tar.gz ${TMP_BUILD_DIR}/

@@ -42,7 +42,9 @@ COPY --from=checker ${TMP_BUILD_DIR}/s6-overlay-nobin.tar.gz ${TMP_BUILD_DIR}/
 COPY --from=checker ${TMP_BUILD_DIR}/justc-envdir-*-linux-amd64.tar.gz ${TMP_BUILD_DIR}/
 COPY --from=checker ${TMP_BUILD_DIR}/s6-overlay-preinit-*-linux-amd64.tar.gz ${TMP_BUILD_DIR}/
 
-RUN apk add --update s6 s6-portable-utils && \
+# Perform an apk upgrade, too to make sure all security updates are applied
+# - do not anticipate compatibility issues at this small layer
+RUN apk update && apk upgrade && apk add s6 s6-portable-utils && \
     cd ${TMP_BUILD_DIR} && \
     tar -C / -xzf s6-overlay-nobin.tar.gz && \
     tar -C / -xzf justc-envdir-*-linux-amd64.tar.gz && \

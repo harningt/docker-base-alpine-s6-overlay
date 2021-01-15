@@ -34,7 +34,7 @@ WORKDIR ${TMP_BUILD_DIR}
 
 RUN gpg --no-options --no-default-keyring --homedir ${TMP_BUILD_DIR} --keyring ./trust.gpg --no-auto-check-trustdb --trust-model always --verify-files *.sig
 
-FROM alpine:3.12
+FROM alpine:3.13
 
 ENV TMP_BUILD_DIR /tmp/build
 

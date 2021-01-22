@@ -13,16 +13,17 @@ ENV TMP_BUILD_DIR /tmp/build
 COPY keys/trust.gpg ${TMP_BUILD_DIR}/
 
 ENV S6_OVERLAY_RELEASE v2.2.0.0
-ENV JUSTC_ENVDIR_RELEASE 1.0.1
-ENV S6_OVERLAY_PREINIT_RELEASE 1.0.4
+ENV JUSTC_ENVDIR_VERSION 1.0.1
+ENV JUSTC_ENVDIR_RELEASE "${JUSTC_ENVDIR_VERSION}-1"
+ENV S6_OVERLAY_PREINIT_RELEASE 1.0.5
 
 # Pull in the overlay binaries
 ADD https://github.com/just-containers/s6-overlay/releases/download/${S6_OVERLAY_RELEASE}/s6-overlay-nobin.tar.gz ${TMP_BUILD_DIR}/
 ADD https://github.com/just-containers/s6-overlay/releases/download/${S6_OVERLAY_RELEASE}/s6-overlay-nobin.tar.gz.sig ${TMP_BUILD_DIR}/
 
 # Pull in justc-envdir binary
-ADD https://github.com/just-containers/justc-envdir/releases/download/v${JUSTC_ENVDIR_RELEASE}/justc-envdir-${JUSTC_ENVDIR_RELEASE}-linux-amd64.tar.gz ${TMP_BUILD_DIR}/
-ADD https://github.com/just-containers/justc-envdir/releases/download/v${JUSTC_ENVDIR_RELEASE}/justc-envdir-${JUSTC_ENVDIR_RELEASE}-linux-amd64.tar.gz.sig ${TMP_BUILD_DIR}/
+ADD https://github.com/just-containers/justc-envdir/releases/download/v${JUSTC_ENVDIR_RELEASE}/justc-envdir-${JUSTC_ENVDIR_VERSION}-linux-amd64.tar.gz ${TMP_BUILD_DIR}/
+ADD https://github.com/just-containers/justc-envdir/releases/download/v${JUSTC_ENVDIR_RELEASE}/justc-envdir-${JUSTC_ENVDIR_VERSION}-linux-amd64.tar.gz.sig ${TMP_BUILD_DIR}/
 
 # Pull in s6-overlay-preinit binary
 ADD https://github.com/just-containers/s6-overlay-preinit/releases/download/v${S6_OVERLAY_PREINIT_RELEASE}/s6-overlay-preinit-${S6_OVERLAY_PREINIT_RELEASE}-linux-amd64.tar.gz ${TMP_BUILD_DIR}/

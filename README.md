@@ -1,22 +1,21 @@
 # docker-base-alpine-s6-overlay
-Base docker image including the s6-overlay but using Alpine's copy of s6
-
-This project's goal is to prepare an Alpine linux base build using
-s6-overlay but with the native Alpine linux s6. This reduces the
-number of separate sources for difficult-to-inspect binaries.
+Base docker image including the s6-overlay but using Alpine's official base.
 
 See the original [s6-overlay project](https://github.com/just-containers/s6-overlay)
 for more details.
-
-Recent updates have taken advantage of the new 'nobin' releases of s6-overlay,
-reducing the need to massage the data format.
 
 # Updating
 
 To synchronize the source tree with s6-overlay, update the S6\_OVERLAY\_RELEASE item
 inside the Dockerfile.
 
-If a new key is used, you'll need to add it to the trust keychain in keys/trust.gpg
+# Notes
+
+Previously the included copy of s6 was from Alpine, but the overlay
+has gotten to the point where version incompatibilities are frequent enough
+to be annoying. The benefit of using Alpine's s6 are probably irrelevant now.
+
+Also there is no gnupg key for the overlay binaries - so that mechanism has been dropped.
 
 # Quickstart
 
